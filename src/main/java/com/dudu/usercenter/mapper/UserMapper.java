@@ -2,6 +2,7 @@ package com.dudu.usercenter.mapper;
 
 import com.dudu.usercenter.model.domain.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 86198
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-10-06 20:23:04
 * @Entity com.dudu.usercenter.model.domain.User
 */
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 
 }

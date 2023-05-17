@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  *
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserService extends IService<User> {
 
     /**
-     * 用户注测
+     * 用户注册
      *
      * @param userAccount 用户账户
      * @param userPassword 用户密码
@@ -52,4 +53,13 @@ public interface UserService extends IService<User> {
      * @return
      */
      int userLogout(HttpServletRequest request);
+
+
+    /**
+     * 根据标签搜索用户
+     *
+     * @param tagNameList
+     * @return
+     */
+    //List<User> searchUsersByTags(List<String> tagNameList);
 }
