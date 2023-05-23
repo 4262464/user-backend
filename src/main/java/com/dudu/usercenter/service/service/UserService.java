@@ -2,6 +2,9 @@ package com.dudu.usercenter.service.service;
 
 import com.dudu.usercenter.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dudu.usercenter.model.domain.request.AdminUpdateRequest;
+import com.dudu.usercenter.model.domain.request.UserUpdatePasswordRequest;
+import com.dudu.usercenter.model.domain.request.UserUpdateRequest;
 import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +56,41 @@ public interface UserService extends IService<User> {
      * @return
      */
      int userLogout(HttpServletRequest request);
+
+    /**
+     *修改密码
+     *
+     * @param userUpdatePasswordRequest
+     * @param request
+     * @return
+     */
+     boolean userUpdatePassword(UserUpdatePasswordRequest userUpdatePasswordRequest,HttpServletRequest request);
+
+    /**
+     * 获取当前用户
+     *
+     * @param request
+     * @return
+     */
+     User getLoginUser(HttpServletRequest request);
+
+    /**
+     * 用户修改自己的信息
+     *
+     * @param userUpdateRequest
+     *
+     * @return
+     */
+     boolean updateMyUser(UserUpdateRequest userUpdateRequest);
+
+    /**
+     * 管理员修改用户的信息
+     *
+     * @param adminUpdateRequest
+     * @param request
+     * @return
+     */
+     boolean adminUpdateUser(AdminUpdateRequest adminUpdateRequest);
 
 
     /**

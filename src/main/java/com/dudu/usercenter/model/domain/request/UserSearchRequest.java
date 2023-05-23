@@ -27,7 +27,7 @@ public class UserSearchRequest implements Serializable {
 
     private Integer userRole;
 
-    private Date updateTime;
+    //private Date updateTime;
 
     private Date createTime;
 

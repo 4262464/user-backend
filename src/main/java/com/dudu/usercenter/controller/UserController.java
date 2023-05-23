@@ -177,7 +177,7 @@ public class UserController {
         Integer userStatus = searchRequest.getUserStatus();
         Integer userRole = searchRequest.getUserRole();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        Date updateTime = searchRequest.getUpdateTime();
+        //Date updateTime = searchRequest.getUpdateTime();
         Date createTime = searchRequest.getCreateTime();
         // username
         if (StringUtils.isNotBlank(username)) {
@@ -208,9 +208,9 @@ public class UserController {
             queryWrapper.eq("userRole", userRole);
         }
 
-        if (updateTime != null) {
-            queryWrapper.like("updateTime", updateTime);
-        }
+//        if (updateTime != null) {
+//            queryWrapper.like("updateTime", updateTime);
+//        }
         if (createTime != null) {
             queryWrapper.like("createTime", createTime);
         }
@@ -219,13 +219,61 @@ public class UserController {
         return ResultUtils.success(users);
     }
 
-
     /**
-     * 是否有管理员
+     * 修改密码
      *
+     * @param updatePasswordRequest
      * @param request
      * @return
      */
+    @PostMapping("/update/password")
+    public BaseResponse<Boolean> updateUserPassword(@RequestBody UserUpdatePasswordRequest updatePasswordRequest,
+                                                    HttpServletRequest request) {
+
+        boolean updateUserPassword = userService.userUpdatePassword(updatePasswordRequest, request);
+        if (updateUserPassword) {
+            return ResultUtils.success(true);
+        } else {
+            return ResultUtils.error(ErrorCode.OPERATION_ERROR,"修改密码失败");
+        }
+    }
+
+    @PostMapping("/update/myUser")
+    public BaseResponse<Boolean> updateMyUser(@RequestBody UserUpdateRequest userUpdateRequest){
+
+        boolean updateMyUser = userService.updateMyUser(userUpdateRequest);
+
+        if (updateMyUser) {
+            return ResultUtils.success(true);
+        } else {
+            return ResultUtils.error(ErrorCode.OPERATION_ERROR,"修改信息失败");
+        }
+    }
+
+    @PostMapping("/update/admin")
+    public BaseResponse<Boolean> adminUpdateUser(@RequestBody AdminUpdateRequest adminUpdateRequest, HttpServletRequest request){
+
+        if (!isAdmin(request)){
+            throw new BusinessException(ErrorCode.NO_AUTH, "无权限");
+        }
+
+        boolean adminUpdateUser = userService.adminUpdateUser(adminUpdateRequest);
+
+        if (adminUpdateUser) {
+            return ResultUtils.success(true);
+        } else {
+            return ResultUtils.error(ErrorCode.OPERATION_ERROR,"修改信息失败");
+        }
+    }
+
+
+
+    /**
+         * 是否有管理员
+         *
+         * @param request
+         * @return
+         */
     private boolean isAdmin(HttpServletRequest request){
         // 仅管理员可查询
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);

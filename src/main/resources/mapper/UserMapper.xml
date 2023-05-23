@@ -14,7 +14,7 @@
             <result property="email" column="email" jdbcType="VARCHAR"/>
             <result property="userStatus" column="userStatus" jdbcType="INTEGER"/>
             <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
-            <result property="creatTime" column="creatTime" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
             <result property="phone" column="phone" jdbcType="VARCHAR"/>
             <result property="userRole" column="userRole" jdbcType="INTEGER"/>
@@ -24,7 +24,7 @@
         id,username,userAccount,
         avatarUrl,gender,userPassword,
         email,userStatus,isDelete,
-        creatTime,updateTime,phone,
+        createTime,updateTime,phone,
         userRole
     </sql>
 </mapper>
